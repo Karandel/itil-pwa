@@ -44,16 +44,11 @@
         :value="ticket.deadlineDate | moment(this.$defaultDateTimeFormat)"
         readonly
       ></v-text-field>
-      <template v-for="(attachment, index) in ticket.attachments">
-        <v-chip outline color="primary" @click = 'onAttachmentClicked(attachment)'>
-          <v-progress-circular
-            indeterminate
-            color="primary"
-            v-if='attachment.downloading'
-          ></v-progress-circular>
-          <v-icon left v-if='!attachment.downloading'>save_alt</v-icon>{{attachment.name + "(" + attachment.size + ")"}}
-        </v-chip>
-      </template>
+      <AttachmentToDownload
+        v-for="(attachment, index) in ticket.attachments"
+        v-bind:attachment="attachment"
+        v-bind:key="index"
+      ></AttachmentToDownload>
       <v-textarea
         auto-grow
         label="Описание"
@@ -93,12 +88,11 @@
   </v-form>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
-
 <script>
+import AttachmentToDownload from '@/components/parts/AttachmentToDownload'
+
 export default {
+  components: {AttachmentToDownload},
   created () {
     this.$store.commit('setMainNavbarState', {title: this.$route.params.ticketNumber, returnButton: true})
     this.$store.commit('setCurrentTicketNumber', this.$route.params.ticketNumber)

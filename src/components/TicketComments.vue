@@ -1,26 +1,20 @@
 <template>
-  <div>
+  <v-container>
     <template v-for="(comment, index) in comments">
-      <v-container>
-        <p class = 'regularGreyFont'>{{comment.author}}<br>{{comment.createdDate | moment($defaultDateTimeFormat)}}</p>
-        <p class = 'redColor' v-if='comment.hidden'>Данное сообщение скрыто от клиента</p>
-        <p class = 'blueColor' v-if='comment.recipientsString !== ""'>{{comment.recipientsString}}</p>
-        <template v-for="(attachment, index) in comment.attachments">
-          <v-chip outline color="primary" @click = 'onAttachmentClicked(attachment)'>
-            <v-progress-circular
-              indeterminate
-              color="primary"
-              v-if='attachment.downloading'
-            ></v-progress-circular>
-            <v-icon left v-if='!attachment.downloading'>save_alt</v-icon>{{attachment.name + "(" + attachment.size + ")"}}
-          </v-chip>
-        </template>
+        <p class='regularGreyFont no-margin-bottom'>{{comment.author}}<br>{{comment.createdDate | moment($defaultDateTimeFormat)}}</p>
+        <p class='redColor no-margin-bottom' v-if='comment.hidden'>Данное сообщение скрыто от клиента</p>
+        <p class='blueColor no-margin-bottom' v-if='comment.recipientsString !== ""'>{{comment.recipientsString}}</p>
+        <AttachmentToDownload
+          v-for="(attachment, index) in comment.attachments"
+          v-bind:attachment="attachment"
+          v-bind:key="index"
+        ></AttachmentToDownload>
         <v-textarea
+          class='no-margin-top'
           auto-grow
           :value="comment.text"
           readonly
         ></v-textarea>
-      </v-container>
     </template>
     <v-footer
       fixed
@@ -39,7 +33,7 @@
           <v-icon>add</v-icon>
         </v-btn>
     </v-footer>
-  </div>
+  </v-container>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -56,10 +50,19 @@
   .redColor {
     color: rgb(255,0,0)
   }
+  .no-margin-bottom {
+    margin-bottom: 0px
+  }
+  .no-margin-top {
+    margin-top: 0px
+  }
 </style>
 
 <script>
+import AttachmentToDownload from '@/components/parts/AttachmentToDownload'
+
 export default {
+  components: {AttachmentToDownload},
   created () {
     this.$store.commit('setMainNavbarState', {title: 'Комментарии', returnButton: true})
     this.$store.dispatch('fetchComments', {self: this})
@@ -75,13 +78,6 @@ export default {
     },
     onMessageAddClicked () {
       this.$router.push({name: 'TicketAddComment', params: { ticketNumber: 'IT-000000338249' }})
-    },
-    onAttachmentClicked (attachment) {
-      var payload = {
-        self: this,
-        attachment: attachment
-      }
-      this.$store.dispatch('fetchAttachmentContent', payload)
     }
   },
   name: 'TicketComments'
