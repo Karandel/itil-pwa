@@ -2,7 +2,7 @@
   <v-snackbar
     :value='errorMsg'
     :top = 'true'
-    :timeout = '0'    
+    :timeout = '0'
   >
     {{errorMsg}}
     <v-btn
@@ -20,11 +20,6 @@ export default {
   computed: {
     errorMsg () {
       return this.$store.state.generalErrorMsg
-    }
-  },
-  watch: {
-    show () {
-      alert('111')
     }
   },
   methods: {
