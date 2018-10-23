@@ -3,6 +3,11 @@
     <v-container>
       <h2>{{ticket.title}}</h2>
       <v-text-field
+        label="Тип"
+        :value="ticket.type"
+        readonly
+      ></v-text-field>
+      <v-text-field
         append-outer-icon="open_in_new"
         label="Инициатор"
         :value="ticket.author"
