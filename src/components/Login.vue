@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     onLoginClicked () {
-      this.apiError = ''
       if (!(this.$refs.form.validate())) {
         return
       }
