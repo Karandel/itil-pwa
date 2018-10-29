@@ -38,21 +38,42 @@ export default {
         hidden: false,
         text: ''
       },
+      attachments: [],
       textRules: [
         v => !!v || 'Пожалуйста, заполните'
       ],
-      ticketNumber: this.$route.params.ticketNumber,
-      attachments: []
+      ticketNumber: this.$route.params.ticketNumber
     }
   },
   mounted () {
-    this.$store.commit('setMainNavbarState', {title: 'Новый комментарий', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: this.$store.state.currentTicketNumber + '. Новый комментарий', returnButton: true})
   },
   methods: {
     submit () {
-      if (this.$refs.form.validate()) {
-        this.$ALP_ITIL_API.postTicketComments(this.ticketNumber, this.commentData, this.attachments)
+      if (!(this.$refs.form.validate())) {
+        return
       }
+
+      this.commentData.attachments = []
+
+      for (var i = 0; i < this.attachments.length; i++) {
+        var attachment = {name: '', content: ''}
+        attachment.name = this.attachments[i].name
+
+        var reader = new FileReader()
+
+        reader.onloadend = function () {
+          var binaryData = reader.result
+          var base64String = window.btoa(binaryData)
+          attachment.content = base64String
+        }
+
+        reader.readAsBinaryString(this.attachments[i])
+
+        this.commentData.attachments.push(attachment)
+      }
+
+      this.$store.dispatch('addTicketComment', {self: this, commentData: this.commentData})
     }
   },
   name: 'TicketAddComment'

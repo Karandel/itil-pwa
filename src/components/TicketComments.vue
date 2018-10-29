@@ -64,7 +64,7 @@ import AttachmentToDownload from '@/components/parts/AttachmentToDownload'
 export default {
   components: {AttachmentToDownload},
   created () {
-    this.$store.commit('setMainNavbarState', {title: 'Комментарии', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: this.$store.state.currentTicketNumber + '. Комментарии', returnButton: true})
     this.$store.dispatch('fetchComments', {self: this})
   },
   computed: {
@@ -77,7 +77,7 @@ export default {
       this.$router.go(-1)
     },
     onMessageAddClicked () {
-      this.$router.push({name: 'TicketAddComment', params: { ticketNumber: 'IT-000000338249' }})
+      this.$router.push({name: 'TicketAddComment', params: { ticketNumber: this.$store.state.currentTicketNumber }})
     }
   },
   name: 'TicketComments'

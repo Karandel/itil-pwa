@@ -68,9 +68,22 @@ export default {
         commit('setDoneFetching')
       })
   },
+  addTicketComment ({commit}, payload) {
+    commit('setIsFetching')
+    payload.self.$ALP_ITIL_API.postTicketComments(this.state.currentTicketNumber, payload.commentData)
+      .then((response) => {
+        commit('newTicketComment')
+      })
+      .catch((error) => {
+        commit('handleApiError', error)
+      })
+      .finally(() => {
+        commit('setDoneFetching')
+      })
+  },
   fetchTicketNewStatuses ({commit}, {self}) {
     commit('setFetchingPageContent')
-    self.$ALP_ITIL_API.getTicketNewStatuses(this.state.currentTicketNumber)
+    self.$ALP_ITIL_API.getTicketComments(this.state.currentTicketNumber)
       .then((response) => {
         if (response && response.data && response.data.statuses) {
           commit('FETCH_PAGE_CONTENT', response.data.statuses)

@@ -1,6 +1,9 @@
 import router from '@/router'
 
 export default {
+  newTicketComment (state) {
+    router.push({name: 'TicketComments', params: {ticketNumber: state.currentTicketNumber}})
+  },
   setMainNavbarState (state, payload) {
     state.mainNavbarState = payload
   },
@@ -73,7 +76,7 @@ export default {
         localStorage.ALP_ITIL_API_SessionID = null
         router.replace({name: 'Login'})
       } else {
-        state.generalErrorMsg = 'Ошибка получения данных. Пожалуйста, попробуйте позднее'
+        state.generalErrorMsg = 'Ошибка получения данных от сервера. Пожалуйста, попробуйте позднее'
       }
     } else {
       state.generalErrorMsg = 'Непредвиденная ошибка. Пожалуйста, попробуйте ещё раз'
