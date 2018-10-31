@@ -14,7 +14,7 @@
 <script>
 export default {
   created () {
-    this.$store.commit('setMainNavbarState', {title: this.ticketNumber + '. Выберите новый этап', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: Выберите новый этап, returnButton: true})
     this.$store.dispatch('fetchTicketNewStatuses', {self: this})
   },
   computed: {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onStatusClicked (status) {
-      alert(status)
+      this.$store.dispatch('updateTicketStatus', {self: this, status: status})
     }
   },
   name: 'TicketAvaliableStatuses'
