@@ -10,7 +10,6 @@ export default new Vuex.Store({
     mainNavbarState: {title: 'ALP ITIL mobile', returnButton: false},
     serverCallInProgress: false,
     pageContent: {},
-    currentTicketNumber: '',
     previousRoute: {
       name: '',
       path: ''

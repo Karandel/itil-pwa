@@ -99,8 +99,7 @@ import AttachmentToDownload from '@/components/parts/AttachmentToDownload'
 export default {
   components: {AttachmentToDownload},
   created () {
-    this.$store.commit('setMainNavbarState', {title: this.$route.params.ticketNumber, returnButton: true})
-    this.$store.commit('setCurrentTicketNumber', this.$route.params.ticketNumber)
+    this.$store.commit('setMainNavbarState', {title: this.ticketNumber, returnButton: true})
     this.$store.dispatch('fetchTicket', {self: this})
   },
   computed: {
@@ -110,7 +109,8 @@ export default {
   },
   data () {
     return {
-      bottomNav: 'active'
+      bottomNav: 'active',
+      ticketNumber: this.$route.params.ticketNumber
     }
   },
   methods: {

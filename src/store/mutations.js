@@ -3,17 +3,14 @@ import router from '@/router'
 const API_SERVER_ERROR_MSG = 'Ошибка получения данных от сервера. Пожалуйста, попробуйте ещё раз'
 
 export default {
-  newTicketComment (state) {
-    router.push({name: 'TicketComments', params: {ticketNumber: state.currentTicketNumber}})
+  newTicketComment (state, ticketNumber) {
+    router.push({name: 'TicketComments', params: {ticketNumber: ticketNumber}})
   },
   setMainNavbarState (state, payload) {
     state.mainNavbarState = payload
   },
   setGeneralErrorMsg (state, errorMsg) {
     state.generalErrorMsg = errorMsg
-  },
-  setCurrentTicketNumber (state, currentTicketNumber) {
-    state.currentTicketNumber = currentTicketNumber
   },
   clearPageContent (state) {
     state.pageContent = {}

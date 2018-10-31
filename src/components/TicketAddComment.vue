@@ -45,8 +45,8 @@ export default {
       ticketNumber: this.$route.params.ticketNumber
     }
   },
-  mounted () {
-    this.$store.commit('setMainNavbarState', {title: this.$store.state.currentTicketNumber + '. Новый комментарий', returnButton: true})
+  created () {
+    this.$store.commit('setMainNavbarState', {title: this.ticketNumber + '. Новый комментарий', returnButton: true})
   },
   methods: {
     submit () {

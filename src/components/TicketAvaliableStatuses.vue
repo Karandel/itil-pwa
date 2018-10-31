@@ -14,12 +14,17 @@
 <script>
 export default {
   created () {
-    this.$store.commit('setMainNavbarState', {title: 'Выберите новый этап', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: this.ticketNumber + '. Выберите новый этап', returnButton: true})
     this.$store.dispatch('fetchTicketNewStatuses', {self: this})
   },
   computed: {
     statuses () {
       return this.$store.state.pageContent
+    }
+  },
+  data () {
+    return {
+      ticketNumber: this.$route.params.ticketNumber
     }
   },
   methods: {
