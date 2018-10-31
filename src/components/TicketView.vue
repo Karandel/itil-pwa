@@ -40,13 +40,13 @@
         append-icon="edit"
         label="Текущий этап"
         :value="ticket.status"
-        @click = 'onTicketStatusClicked(ticket.number)'
-        @click:append = 'onTicketStatusClicked(ticket.number)'
+        @click = 'onTicketStatusClicked()'
+        @click:append = 'onTicketStatusClicked()'
         readonly
       ></v-text-field>
       <v-text-field v-if="!ticket.canChangeStatus"
         label="Текущий этап"
-        :value="ticket.status"      
+        :value="ticket.status"
         readonly
       ></v-text-field>
       <v-text-field
@@ -76,7 +76,7 @@
           color="teal"
           flat
           value ='active'
-          @click="onTicketCommentsClicked(ticket.number)"
+          @click="onTicketCommentsClicked()"
         >
           <span>Комментарии</span>
           <v-badge color="red">
@@ -119,17 +119,14 @@ export default {
     }
   },
   methods: {
-    onBackClicked () {
-      this.$router.go(-1)
-    },
     onUserViewOpenClicked (userName) {
       this.$router.push({name: 'UserView', params: { name: userName }})
     },
-    onTicketStatusClicked (ticketNumber) {
-      this.$router.push({name: 'TicketAvaliableStatuses', params: { ticketNumber: ticketNumber }})
+    onTicketStatusClicked () {
+      this.$router.push({name: 'TicketAvaliableStatuses', params: { ticketNumber: this.ticketNumber }})
     },
-    onTicketCommentsClicked (ticketNumber) {
-      this.$router.push({name: 'TicketComments', params: { ticketNumber: ticketNumber }})
+    onTicketCommentsClicked () {
+      this.$router.push({name: 'TicketComments', params: { ticketNumber: this.ticketNumber }})
     },
     onAttachmentClicked (attachment) {
       var payload = {
