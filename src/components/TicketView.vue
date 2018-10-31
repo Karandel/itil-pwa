@@ -36,12 +36,17 @@
         @click:append-outer = 'onUserViewOpenClicked(ticket.assignee)'
         readonly
       ></v-text-field>
-      <v-text-field
+      <v-text-field v-if="ticket.canChangeStatus"
         append-icon="edit"
         label="Текущий этап"
         :value="ticket.status"
         @click = 'onTicketStatusClicked(ticket.number)'
         @click:append = 'onTicketStatusClicked(ticket.number)'
+        readonly
+      ></v-text-field>
+      <v-text-field v-if="!ticket.canChangeStatus"
+        label="Текущий этап"
+        :value="ticket.status"      
         readonly
       ></v-text-field>
       <v-text-field
