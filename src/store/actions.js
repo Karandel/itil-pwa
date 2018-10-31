@@ -83,7 +83,7 @@ export default {
   },
   fetchTicketNewStatuses ({commit}, {self}) {
     commit('setFetchingPageContent')
-    self.$ALP_ITIL_API.getTicketComments(this.state.currentTicketNumber)
+    self.$ALP_ITIL_API.getTicketNewStatuses(this.state.currentTicketNumber)
       .then((response) => {
         if (response && response.data && response.data.statuses) {
           commit('FETCH_PAGE_CONTENT', response.data.statuses)
