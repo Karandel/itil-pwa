@@ -9,6 +9,8 @@ export default {
             sessionID: response.data.sessionID
           }
           commit('loginUser', commitPayload)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -24,6 +26,8 @@ export default {
       .then((response) => {
         if (response && response.data && response.data.tickets) {
           commit('FETCH_PAGE_CONTENT', response.data.tickets)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -44,6 +48,8 @@ export default {
             })
           }
           commit('FETCH_PAGE_CONTENT', response.data.ticket)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -59,6 +65,8 @@ export default {
       .then((response) => {
         if (response && response.data && response.data.comments) {
           commit('FETCH_PAGE_CONTENT', response.data.comments)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -87,6 +95,8 @@ export default {
       .then((response) => {
         if (response && response.data && response.data.statuses) {
           commit('FETCH_PAGE_CONTENT', response.data.statuses)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -102,6 +112,8 @@ export default {
       .then((response) => {
         if (response && response.data && response.data.attachment) {
           commit('downloadAttachment', response.data.attachment)
+        } else {
+          throwErrornoDataInServerResponse()
         }
       })
       .catch((error) => {
@@ -111,4 +123,10 @@ export default {
         payload.attachment.downloading = false
       })
   }
+}
+
+function throwErrornoDataInServerResponse () {
+  var error = new Error('noDataInServerResponse')
+  console.log(error)
+  throw error
 }

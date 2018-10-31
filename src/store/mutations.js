@@ -1,5 +1,7 @@
 import router from '@/router'
 
+const API_SERVER_ERROR_MSG = 'Ошибка получения данных от сервера. Пожалуйста, попробуйте ещё раз'
+
 export default {
   newTicketComment (state) {
     router.push({name: 'TicketComments', params: {ticketNumber: state.currentTicketNumber}})
@@ -70,14 +72,16 @@ export default {
         if (error.response.data && error.response.data.errorDescription) {
           state.serverCallErrorDescription = error.response.data.errorDescription
         } else {
-          state.generalErrorMsg = 'Ошибка получения данных. Пожалуйста, попробуйте позднее'
+          state.generalErrorMsg = API_SERVER_ERROR_MSG
         }
       } else if (error.response.status === 401) {
         localStorage.ALP_ITIL_API_SessionID = null
         router.replace({name: 'Login'})
       } else {
-        state.generalErrorMsg = 'Ошибка получения данных от сервера. Пожалуйста, попробуйте позднее'
+        state.generalErrorMsg = API_SERVER_ERROR_MSG
       }
+    } else if (error.message === 'noDataInServerResponse') {
+      state.generalErrorMsg = API_SERVER_ERROR_MSG
     } else {
       state.generalErrorMsg = 'Непредвиденная ошибка. Пожалуйста, попробуйте ещё раз'
     }
