@@ -46,7 +46,7 @@ export default {
     }
   },
   created () {
-    this.$store.commit('setMainNavbarState', {title: this.ticketNumber + '. Новый комментарий', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: Новый комментарий, returnButton: true})
   },
   methods: {
     submit () {

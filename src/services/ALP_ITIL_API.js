@@ -52,6 +52,10 @@ export default class ALP_ITIL_API {
     return this.service.get('/tickets/' + ticketNumber + '/statuses')
   }
 
+  updateTicketStatus (ticketNumber, status) {
+    return this.service.post('/tickets/' + ticketNumber + '/statuses/' + status)
+  }
+
   getAttachmentContent (attachmentID, callback) {
     return this.service.get('/attachments/' + attachmentID)
   }

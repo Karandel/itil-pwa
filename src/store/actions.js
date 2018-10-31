@@ -106,6 +106,19 @@ export default {
         commit('setDoneFetching')
       })
   },
+  updateTicketStatus ({commit}, payload) {
+    commit('setIsFetching')
+    payload.self.$ALP_ITIL_API.updateTicketStatus(payload.self.ticketNumber, payload.status)
+      .then((response) => {
+        commit('newTicketStatus', payload.self.ticketNumber)
+      })
+      .catch((error) => {
+        commit('handleApiError', error)
+      })
+      .finally(() => {
+        commit('setDoneFetching')
+      })
+  },
   fetchAttachmentContent ({commit}, payload) {
     payload.attachment.downloading = true
     payload.self.$ALP_ITIL_API.getAttachmentContent(payload.attachment.id)

@@ -6,6 +6,9 @@ export default {
   newTicketComment (state, ticketNumber) {
     router.push({name: 'TicketComments', params: {ticketNumber: ticketNumber}})
   },
+  newTicketStatus (state, ticketNumber) {
+    router.push({name: 'TicketView', params: {ticketNumber: ticketNumber}})
+  },
   setMainNavbarState (state, payload) {
     state.mainNavbarState = payload
   },
