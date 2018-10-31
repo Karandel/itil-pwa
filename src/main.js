@@ -29,7 +29,11 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 
-Vue.prototype.$ALP_ITIL_API = new ALP_ITIL_API()
+Vue.prototype.$ALP_ITIL_API = new ALP_ITIL_API({
+  baseURL: process.env.ALP_ITIL_API.BASE_URL,
+  authKey: process.env.ALP_ITIL_API.API_KEY,
+  timeout: 100000,
+  localStorageSessionIDName: 'ALP_ITIL_API_SessionID'})
 
 /* eslint-disable no-new */
 new Vue({

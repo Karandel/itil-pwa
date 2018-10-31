@@ -1,20 +1,20 @@
 import axios from 'axios'
 
 export default class ALP_ITIL_API {
-  constructor () {
+  constructor (settings) {
     let service = axios.create({
-      baseURL: process.env.ALP_ITIL_API.BASE_URL,
-      timeout: 100000,
+      baseURL: settings.baseURL,
+      timeout: settings.timeout,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': process.env.ALP_ITIL_API.API_KEY,
-        'sessionid': localStorage.getItem('ALP_ITIL_API_SessionID')
+        'Authorization': settings.authKey,
+        'sessionid': localStorage.getItem(settings.localStorageSessionIDName)
       }
     })
     this.service = service
 
     service.interceptors.request.use(function (config) {
-      config.headers.sessionid = localStorage.getItem('ALP_ITIL_API_SessionID')
+      config.headers.sessionid = localStorage.getItem(settings.localStorageSessionIDName)
       return config
     }, function (error) {
       return Promise.reject(error)
