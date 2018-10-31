@@ -14,7 +14,7 @@
 <script>
 export default {
   created () {
-    this.$store.commit('setMainNavbarState', {title: Выберите новый этап, returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: 'Выберите новый этап', returnButton: true})
     this.$store.dispatch('fetchTicketNewStatuses', {self: this})
   },
   computed: {
