@@ -77,6 +77,13 @@ export default {
       } else if (error.response.status === 401) {
         localStorage.ALP_ITIL_API_SessionID = null
         router.replace({name: 'Login'})
+      } else if (error.response.status === 409) {
+        if (error.response.data && error.response.data.errorDescription) {
+          state.generalErrorMsg = error.response.data.errorDescription
+          router.go(-1)
+        } else {
+          state.generalErrorMsg = API_SERVER_ERROR_MSG
+        }
       } else {
         state.generalErrorMsg = API_SERVER_ERROR_MSG
       }
@@ -90,6 +97,5 @@ export default {
 
 function setStateIsFetching (state) {
   state.serverCallInProgress = true
-  state.generalErrorMsg = ''
   state.serverCallErrorDescription = ''
 }
