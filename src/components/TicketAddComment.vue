@@ -1,29 +1,27 @@
 <template>
-  <div>
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-container>
-        <v-switch
-          v-model="commentData.hidden"
-          color=primary
-          label="Скрытый комментарий"
-        ></v-switch>
-        <AddAttachments v-bind:attachments="attachments"></AddAttachments>
-        <v-textarea
-          v-model="commentData.text"
-          :rules = 'textRules'
-          label="Текст комментария"
-          required
-        ></v-textarea>
-        <v-btn
-          color="primary"
-          dark
-          @click="submit"
-        >
-          Добавить
-        </v-btn>
-      </v-container>
-    </v-form>
-  </div>
+  <v-form ref="form" v-model="valid" lazy-validation>
+    <v-container>
+      <v-switch
+        v-model="commentData.hidden"
+        color=primary
+        label="Скрытый комментарий"
+      ></v-switch>
+      <AddAttachments v-bind:attachments="attachments"></AddAttachments>
+      <v-textarea
+        v-model="commentData.text"
+        :rules = 'textRules'
+        label="Текст комментария"
+        required
+      ></v-textarea>
+      <v-btn
+        color="primary"
+        dark
+        @click="submit"
+      >
+        Добавить
+      </v-btn>
+    </v-container>
+  </v-form>
 </template>
 
 <script>
