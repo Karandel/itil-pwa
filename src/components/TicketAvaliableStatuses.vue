@@ -32,7 +32,7 @@ export default {
       if (!status.actionBeforeStatus) {
         this.$store.dispatch('updateTicketStatus', {self: this, status: status.name})
       } else {
-        this.$router.push({name: 'TicketBeforeNewStatus', params: { ticketNumber: this.ticketnumber, status: status.name, actionBeforeStatus: status.actionBeforeStatus }})
+        this.$router.push({name: 'TicketBeforeNewStatus', params: { ticketNumber: this.ticketNumber, status: status.name, actionBeforeStatus: status.actionBeforeStatus }})
       }
     }
   },
