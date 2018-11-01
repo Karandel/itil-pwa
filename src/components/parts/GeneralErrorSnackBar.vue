@@ -34,7 +34,6 @@ export default {
   },
   watch: {
     visible: function (newValue, oldValue) {
-      debugger
       if (oldValue && !newValue) {
         this.$store.commit('setGeneralErrorMsg', '')
       }

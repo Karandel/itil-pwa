@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import TicketList from '@/components/TicketList'
 import TicketView from '@/components/TicketView'
 import TicketAvaliableStatuses from '@/components/TicketAvaliableStatuses'
+import TicketBeforeNewStatus from '@/components/TicketBeforeNewStatus'
 import TicketComments from '@/components/TicketComments'
 import TicketAddComment from '@/components/TicketAddComment'
 import UserView from '@/components/UserView'
@@ -32,6 +33,11 @@ let router = new Router({
       path: '/tickets/:ticketNumber/newStatus',
       name: 'TicketAvaliableStatuses',
       component: TicketAvaliableStatuses
+    },
+    {
+      path: '/tickets/:ticketNumber/newStatus/:status',
+      name: 'TicketBeforeNewStatus',
+      component: TicketBeforeNewStatus
     },
     {
       path: '/tickets/:ticketNumber/comments',

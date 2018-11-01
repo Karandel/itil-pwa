@@ -25,7 +25,7 @@ export default {
     self.$ALP_ITIL_API.getPersonalTicketList()
       .then((response) => {
         if (response && response.data && response.data.tickets) {
-          commit('FETCH_PAGE_CONTENT', response.data.tickets)
+          commit('setPageContent', response.data.tickets)
         } else {
           throwErrornoDataInServerResponse()
         }
@@ -47,7 +47,7 @@ export default {
               element.downloading = false
             })
           }
-          commit('FETCH_PAGE_CONTENT', response.data.ticket)
+          commit('setPageContent', response.data.ticket)
         } else {
           throwErrornoDataInServerResponse()
         }
@@ -64,7 +64,7 @@ export default {
     self.$ALP_ITIL_API.getTicketComments(self.ticketNumber)
       .then((response) => {
         if (response && response.data && response.data.comments) {
-          commit('FETCH_PAGE_CONTENT', response.data.comments)
+          commit('setPageContent', response.data.comments)
         } else {
           throwErrornoDataInServerResponse()
         }
@@ -94,7 +94,7 @@ export default {
     self.$ALP_ITIL_API.getTicketNewStatuses(self.ticketNumber)
       .then((response) => {
         if (response && response.data && response.data.statuses) {
-          commit('FETCH_PAGE_CONTENT', response.data.statuses)
+          commit('setPageContent', response.data.statuses)
         } else {
           throwErrornoDataInServerResponse()
         }

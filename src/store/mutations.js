@@ -30,7 +30,7 @@ export default {
     state.previousRoute.path = state.route.path
     state.pageContent = {}
   },
-  FETCH_PAGE_CONTENT (state, pageContent) {
+  setPageContent (state, pageContent) {
     state.pageContent = pageContent
   },
   loginUser (state, payload) {
