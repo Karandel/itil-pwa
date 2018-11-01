@@ -1,8 +1,8 @@
 <template>
   <v-snackbar
-    :value='errorMsg'
+    v-model='visible'
     :top = 'true'
-    :timeout = '0'
+    :timeout = '5000'
   >
     {{errorMsg}}
     <v-btn
@@ -17,6 +17,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      visible: false
+    }
+  },
   computed: {
     errorMsg () {
       return this.$store.state.generalErrorMsg
@@ -24,7 +29,22 @@ export default {
   },
   methods: {
     onCloseClicked () {
-      this.$store.commit('setGeneralErrorMsg', '')
+      this.visible = false
+    }
+  },
+  watch: {
+    visible: function (newValue, oldValue) {
+      debugger
+      if (oldValue && !newValue) {
+        this.$store.commit('setGeneralErrorMsg', '')
+      }
+    },
+    '$store.state.generalErrorMsg': function (value) {
+      if (value) {
+        this.visible = true
+      } else {
+        this.visible = false
+      }
     }
   },
   name: 'GeneralErrorSnackBar'
