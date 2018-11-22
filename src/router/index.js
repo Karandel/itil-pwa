@@ -6,6 +6,7 @@ import TicketView from '@/components/TicketView'
 import TicketAvaliableStatuses from '@/components/TicketAvaliableStatuses'
 import TicketBeforeNewStatus from '@/components/TicketBeforeNewStatus'
 import TicketComments from '@/components/TicketComments'
+import TicketLaborCosts from '@/components/TicketLaborCosts'
 import TicketAddComment from '@/components/TicketAddComment'
 import UserView from '@/components/UserView'
 
@@ -48,6 +49,11 @@ let router = new Router({
       path: '/tickets/:ticketNumber/comments/add',
       name: 'TicketAddComment',
       component: TicketAddComment
+    },
+    {
+      path: '/tickets/:ticketNumber/laborCosts',
+      name: 'TicketLaborCosts',
+      component: TicketLaborCosts
     },
     {
       path: '/user/:name',

@@ -89,6 +89,7 @@
           color="teal"
           flat
           value ='active'
+          @click="onTicketTimeSheetClicked()"
         >
           <span>Трудозатраты</span>
           <v-icon>timer</v-icon>
@@ -127,6 +128,9 @@ export default {
     },
     onTicketCommentsClicked () {
       this.$router.push({name: 'TicketComments', params: { ticketNumber: this.ticketNumber }})
+    },
+    onTicketTimeSheetClicked () {
+      this.$router.push({name: 'TicketLaborCosts', params: { ticketNumber: this.ticketNumber }})
     },
     onAttachmentClicked (attachment) {
       var payload = {

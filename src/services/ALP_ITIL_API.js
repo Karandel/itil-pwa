@@ -44,6 +44,10 @@ export default class ALP_ITIL_API {
     return this.service.get('/tickets/' + ticketNumber + '/comments')
   }
 
+  getTicketLaborCosts (ticketNumber) {
+    return this.service.get('/tickets/' + ticketNumber + '/laborCosts')
+  }
+
   postTicketComments (ticketNumber, commentData) {
     return this.service.post('/tickets/' + ticketNumber + '/comments', commentData)
   }

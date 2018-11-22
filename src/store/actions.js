@@ -59,6 +59,23 @@ export default {
         commit('setDoneFetching')
       })
   },
+  fetchLaborCosts ({commit}, {self}) {
+    commit('setFetchingPageContent')
+    self.$ALP_ITIL_API.getTicketLaborCosts(self.ticketNumber)
+      .then((response) => {
+        if (response && response.data && response.data.laborCosts) {
+          commit('setPageContent', response.data.laborCosts)
+        } else {
+          throwErrornoDataInServerResponse()
+        }
+      })
+      .catch((error) => {
+        commit('handleApiError', error)
+      })
+      .finally(() => {
+        commit('setDoneFetching')
+      })
+  },
   fetchComments ({commit}, {self}) {
     commit('setFetchingPageContent')
     self.$ALP_ITIL_API.getTicketComments(self.ticketNumber)
