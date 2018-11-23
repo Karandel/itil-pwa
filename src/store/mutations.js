@@ -34,7 +34,7 @@ export default {
     state.pageContent = pageContent
   },
   loginUser (state, payload) {
-    localStorage.userName = payload.email
+    localStorage.userName = payload.userName
     localStorage.ALP_ITIL_API_SessionID = payload.sessionID
     if (state.previousRoute.name === 'Login' || state.previousRoute.name === '' || state.previousRoute.name === null || state.previousRoute.name === undefined) {
       router.replace({path: '/'})

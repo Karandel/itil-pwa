@@ -5,7 +5,7 @@ export default {
       .then((response) => {
         if (response && response.data && response.data.sessionID) {
           var commitPayload = {
-            email: payload.requestData.email,
+            userName: payload.requestData.userName,
             sessionID: response.data.sessionID
           }
           commit('loginUser', commitPayload)

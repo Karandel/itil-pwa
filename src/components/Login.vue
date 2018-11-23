@@ -3,9 +3,9 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         prepend-icon="person"
-        v-model="email"
-        :rules="emailRules"
-        label="Email"
+        v-model="userName"
+        :rules="userNameRules"
+        label="Пользователь"
         required
       ></v-text-field>
       <v-text-field
@@ -27,10 +27,9 @@ export default {
   data () {
     return {
       valid: true,
-      email: (localStorage.getItem('userName') !== undefined, localStorage.getItem('userName'), ''),
-      emailRules: [
-        v => !!v || 'Пожалуйста, укажите email',
-        v => /.+@.+/.test(v) || 'Не правильный формат email'
+      userName: (localStorage.getItem('userName') !== undefined, localStorage.getItem('userName'), ''),
+      userNameRules: [
+        v => !!v || 'Пожалуйста, укажите email'
       ],
       password: '',
       passwordRules: [
@@ -59,7 +58,7 @@ export default {
       var payload = {
         self: this,
         requestData: {
-          email: this.email,
+          email: this.userName,
           password: this.password
         }
       }
