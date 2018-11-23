@@ -58,7 +58,7 @@ export default {
       var payload = {
         self: this,
         requestData: {
-          email: this.userName,
+          userName: this.userName,
           password: this.password
         }
       }
