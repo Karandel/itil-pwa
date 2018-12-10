@@ -18,7 +18,11 @@ export default {
   },
   methods: {
     onBackClicked () {
-      this.$router.go(-1)
+      if (this.$store.state.mainNavbarState.returnPass) {
+        this.$router.push(this.$store.state.mainNavbarState.returnPass)
+      } else {
+        this.$router.go(-1)
+      }
     }
   }
 }

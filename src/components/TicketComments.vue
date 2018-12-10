@@ -64,7 +64,7 @@ import AttachmentToDownload from '@/components/parts/AttachmentToDownload'
 export default {
   components: {AttachmentToDownload},
   created () {
-    this.$store.commit('setMainNavbarState', {title: 'Комментарии', returnButton: true})
+    this.$store.commit('setMainNavbarState', {title: 'Комментарии', returnButton: true, returnPass: {name: 'TicketView', params: { ticketNumber: this.ticketNumber }}})
     this.$store.dispatch('fetchComments', {self: this})
   },
   computed: {
