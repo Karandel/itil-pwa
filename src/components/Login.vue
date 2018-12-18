@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       valid: true,
-      userName: (localStorage.getItem('userName') !== undefined, localStorage.getItem('userName'), ''),
+      userName: (localStorage.getItem('userName') === undefined, '', localStorage.getItem('userName')),
       userNameRules: [
         v => !!v || 'Пожалуйста, укажите email'
       ],
