@@ -7,6 +7,7 @@
         :rules="userNameRules"
         label="Пользователь"
         required
+        @keyup.enter.native="onLoginClicked()"
       ></v-text-field>
       <v-text-field
         prepend-icon="lock"
@@ -16,8 +17,9 @@
         label="Пароль"
         type="password"
         required
+        @keyup.enter.native="onLoginClicked()"
       ></v-text-field>
-      <v-btn block color="primary" @click="onLoginClicked ()">Войти</v-btn>
+      <v-btn block color="primary" @click="onLoginClicked()">Войти</v-btn>
     </v-form>
   </v-container>
 </template>
