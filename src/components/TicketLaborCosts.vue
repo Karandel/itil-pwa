@@ -1,17 +1,39 @@
 <template>
   <v-container>
     <template v-for="(laborCost, index) in laborCosts">
-      <v-list-tile>
-        <v-list-tile-content>
-          <v-list-tile-sub-title>{{laborCost.assignee}}</v-list-tile-sub-title>
-          <v-list-tile-sub-title>{{laborCost.startDate | moment($defaultDateTimeFormat)}}</v-list-tile-sub-title>
-          <v-list-tile-title v-html="laborCost.comment"></v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-divider v-if="index + 1 < laborCosts.length" :key="`divider-${index}`"></v-divider>
+      <p class='regularGreyFont no-margin-bottom'>{{laborCost.assignee}}</p>
+      <p class='blueColor no-margin-bottom' v-if='laborCost.overtime'>{{laborCost.startDate | moment($defaultDateTimeFormat)}} ({{laborCost.hoursSpent}}ч сверхурочно)</p>
+      <p class='blueColor no-margin-bottom' v-else>{{laborCost.startDate | moment($defaultDateTimeFormat)}} ({{laborCost.hoursSpent}}ч)</p>
+      <v-textarea
+        class='no-margin-top'
+        auto-grow
+        :value="laborCost.comment"
+        readonly
+      ></v-textarea>
     </template>
   </v-container>
 </template>
+
+<style scoped>
+  .regularFontSize {
+    font-size: 16px
+  }
+  .regularGreyFont {
+    color: rgba(0,0,0,.54)
+  }
+  .blueColor {
+    color: rgb(0,0,255)
+  }
+  .redColor {
+    color: rgb(255,0,0)
+  }
+  .no-margin-bottom {
+    margin-bottom: 0px
+  }
+  .no-margin-top {
+    margin-top: 0px
+  }
+</style>
 
 <script>
 
