@@ -56,7 +56,7 @@ let router = new Router({
       component: TicketLaborCosts
     },
     {
-      path: '/user/:name',
+      path: '/users/:userName',
       name: 'UserView',
       component: UserView
     }

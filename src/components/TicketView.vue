@@ -10,21 +10,21 @@
       <v-text-field
         append-outer-icon="open_in_new"
         label="Инициатор"
-        :value="ticket.author"
+        :value="authorName"
         @click:append-outer = 'onUserViewOpenClicked(ticket.author)'
         readonly
       ></v-text-field>
       <v-text-field v-if="ticket.user !== '' && ticket.user !== null"
         append-outer-icon="open_in_new"
         label="Пользователь"
-        :value="ticket.user"
+        :value="userName"
         @click:append-outer = 'onUserViewOpenClicked(ticket.user)'
         readonly
       ></v-text-field>
       <v-text-field
         append-outer-icon="open_in_new"
         label="Менеджер"
-        :value="ticket.manager"
+        :value="managerName"
         @click:append-outer = 'onUserViewOpenClicked(ticket.manager)'
         readonly
       ></v-text-field>
@@ -32,7 +32,7 @@
         append-icon="edit"
         append-outer-icon="open_in_new"
         label="Исполнитель"
-        :value="ticket.assignee"
+        :value="assigneeName"
         @click:append-outer = 'onUserViewOpenClicked(ticket.assignee)'
         readonly
       ></v-text-field>
@@ -111,6 +111,18 @@ export default {
   computed: {
     ticket () {
       return this.$store.state.pageContent
+    },
+    authorName () {
+      return (this.ticket && this.ticket.author && this.ticket.author.name ? this.ticket.author.name : '')
+    },
+    userName () {
+      return (this.ticket && this.ticket.user && this.ticket.user.name ? this.ticket.user.name : '')
+    },
+    managerName () {
+      return (this.ticket && this.ticket.manager && this.ticket.manager.name ? this.ticket.manager.name : '')
+    },
+    assigneeName () {
+      return (this.ticket && this.ticket.assignee && this.ticket.assignee.name ? this.ticket.assignee.name : '')
     }
   },
   data () {
@@ -120,8 +132,10 @@ export default {
     }
   },
   methods: {
-    onUserViewOpenClicked (userName) {
-      this.$router.push({name: 'UserView', params: { name: userName }})
+    onUserViewOpenClicked (user) {
+      if (user) {
+        this.$router.push({name: 'UserView', params: { userName: user.name, userID: user.id }})
+      }
     },
     onTicketStatusClicked () {
       this.$router.push({name: 'TicketAvaliableStatuses', params: { ticketNumber: this.ticketNumber }})

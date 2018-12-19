@@ -1,9 +1,5 @@
 <template>
   <div>
-    <v-toolbar app color="primary" dark fixed>
-      <v-icon @click='onBackClicked'>arrow_back</v-icon>
-      <v-toolbar-title>{{user.name}}</v-toolbar-title>
-    </v-toolbar>
     <v-form>
       <v-container>
         <v-text-field
@@ -11,7 +7,7 @@
           :value="user.company"
           readonly
         ></v-text-field>
-        <v-text-field
+        <v-text-field v-if="user.email"
           append-icon="email"
           label="Email"
           :value="user.email"
@@ -19,7 +15,12 @@
           @click = 'onEmailClicked(user.email)'
           readonly
         ></v-text-field>
-        <v-text-field
+        <v-text-field v-else
+          label="Email"
+          :value="user.email"
+          readonly
+        ></v-text-field>
+        <v-text-field v-if="user.phone"
           append-icon="call"
           label="Телефон"
           :value="user.phone"
@@ -27,27 +28,31 @@
           @click:append = 'onPhoneClicked(user.phone)'
           @click = 'onPhoneClicked(user.phone)'
         ></v-text-field>
+        <v-text-field v-else
+          label="Телефон"
+          :value="user.phone"
+          readonly          
+        ></v-text-field>
       </v-container>
     </v-form>
   </div>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
-
 <script>
 export default {
+  created () {
+    this.$store.commit('setMainNavbarState', {title: this.userName, returnButton: true})
+    this.$store.dispatch('fetchUserInfo', {self: this})
+  },
+  computed: {
+    user () {
+      return this.$store.state.pageContent
+    }
+  },
   data () {
     return {
-      bottomNav: 'message',
-      user:
-      {
-        name: 'Петров Петр',
-        company: 'Рога и Копыта',
-        email: 'test@test.test',
-        phone: '+7-999-999-99-99'
-      }
+      userID: this.$route.params.userID,
+      userName: this.$route.params.userName
     }
   },
   methods: {
@@ -55,10 +60,14 @@ export default {
       this.$router.go(-1)
     },
     onPhoneClicked (phoneNumber) {
-      window.location.href = 'tel://' + phoneNumber
+      if (phoneNumber) {
+        window.location.href = 'tel://' + phoneNumber
+      }
     },
     onEmailClicked (email) {
-      window.location.href = 'mailto:' + email
+      if (email) {
+        window.location.href = 'mailto:' + email
+      }
     }
   },
   name: 'UserView'

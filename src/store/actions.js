@@ -152,6 +152,23 @@ export default {
       .finally(() => {
         payload.attachment.downloading = false
       })
+  },
+  fetchUserInfo ({commit}, {self}) {
+    commit('setFetchingPageContent')
+    self.$ALP_ITIL_API.getUserInfo(self.userID)
+      .then((response) => {
+        if (response && response.data && response.data.user) {
+          commit('setPageContent', response.data.user)
+        } else {
+          throwErrornoDataInServerResponse()
+        }
+      })
+      .catch((error) => {
+        commit('handleApiError', error)
+      })
+      .finally(() => {
+        commit('setDoneFetching')
+      })
   }
 }
 

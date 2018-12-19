@@ -63,4 +63,8 @@ export default class ALP_ITIL_API {
   getAttachmentContent (attachmentID, callback) {
     return this.service.get('/attachments/' + attachmentID)
   }
+
+  getUserInfo (userID) {
+    return this.service.get('/users/' + userID)
+  }
 }
