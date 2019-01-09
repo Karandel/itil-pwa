@@ -29,7 +29,6 @@
         readonly
       ></v-text-field>
       <v-text-field
-        append-icon="edit"
         append-outer-icon="open_in_new"
         label="Исполнитель"
         :value="assigneeName"
